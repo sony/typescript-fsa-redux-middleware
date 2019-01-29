@@ -20,6 +20,9 @@ const middleware = middleware()
 })
 ```
 
+# Sample Application
+Let you check sample application on [sample/](./sample/) folder.
+
 # License
 MIT
 

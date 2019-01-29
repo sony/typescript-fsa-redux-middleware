@@ -1,7 +1,7 @@
 import { Dispatch, MiddlewareAPI } from "redux";
 import { Action, ActionCreator } from "typescript-fsa";
 
-export interface MiddlewareBuilder<S, D extends Dispatch = Dispatch> {
+export interface MiddlewareBuilder<S> {
   case<P>(
     actionCreator: ActionCreator<P>,
     handler: Handler<S, P>,
@@ -38,12 +38,12 @@ export interface MiddlewareBuilder<S, D extends Dispatch = Dispatch> {
     handler: Handler<S, P>,
   ): MiddlewareBuilder<S>;
 
-  <S>(api: MiddlewareAPI<D, S>): (next: Dispatch) => Dispatch;
+  <S>(api: MiddlewareAPI<S>): (next: Dispatch<S>) => Dispatch<S>;
 }
 
-export type Handler<S, P, D extends Dispatch = Dispatch> = (
-  api: MiddlewareAPI<D, S>,
-  next: D,
+export type Handler<S, P> = (
+  api: MiddlewareAPI<S>,
+  next: Dispatch<S>,
   action: Action<P>,
 ) => void;
 
@@ -90,10 +90,10 @@ export function middleware<S>(): MiddlewareBuilder<S> {
   return middleware;
 }
 
-function getMiddlewareFunction<S, D extends Dispatch = Dispatch, A extends Action<any> = Action<any>>(
+function getMiddlewareFunction<S, A extends Action<any> = Action<any>>(
   cases: CaseMap<S>,
 ) {
-  return (api: MiddlewareAPI<D, S>) => (next: D) => (action: A) => {
+  return (api: MiddlewareAPI<S>) => (next: Dispatch<S>) => (action: A) => {
     const caseItems = cases.get(action.type);
     if (caseItems) {
       for (const caseItem of caseItems) {

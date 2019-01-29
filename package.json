@@ -1,13 +1,12 @@
 {
   "name": "typescript-fsa-redux-middleware",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "typescript-fsa support for redux vanilla middleware",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "yarn run clean && tsc -p tsconfig.build.json",
     "clean": "rm -rf dist/*",
-    "postinstall": "yarn run build",
     "tslint": "tslint --project .",
     "test": "jest --coverage"
   },

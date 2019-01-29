@@ -24,4 +24,4 @@ const middleware = middleware()
 MIT
 
 # Copyright
-Copyright (c) Sony Corporation.
+Copyright (c) 2018-2019 Sony Corporation.

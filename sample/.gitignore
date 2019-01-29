@@ -1,0 +1,7 @@
+package-lock.json
+yarn-error.log
+db.json
+cache/
+node_modules/
+dist/assets/
+dist/assets/app.browser.js

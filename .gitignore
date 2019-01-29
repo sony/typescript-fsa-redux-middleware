@@ -1,0 +1,6 @@
+.vscode/
+coverage/
+dist/**/*.map
+node_modules/
+npm-debug.log
+yarn.lock

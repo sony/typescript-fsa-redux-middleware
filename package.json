@@ -18,6 +18,13 @@
     "middleware"
   ],
   "author": "Yasuharu Seki",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sony/typescript-fsa-redux-middleware.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sony/typescript-fsa-redux-middleware/issues"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^23.3.10",

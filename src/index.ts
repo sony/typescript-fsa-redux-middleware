@@ -99,6 +99,7 @@ function getMiddlewareFunction<S, D extends Dispatch = Dispatch, A extends Actio
       for (const caseItem of caseItems) {
         caseItem.handler(api, next, action);
       }
+      return;
     }
     return next(action);
   };

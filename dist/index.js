@@ -31,6 +31,7 @@ function getMiddlewareFunction(cases) {
             for (const caseItem of caseItems) {
                 caseItem.handler(api, next, action);
             }
+            return;
         }
         return next(action);
     };

@@ -99,6 +99,7 @@ function getMiddlewareFunction<S, A extends Action<any> = Action<any>>(
       for (const caseItem of caseItems) {
         caseItem.handler(api, next, action);
       }
+      return;
     }
     return next(action);
   };

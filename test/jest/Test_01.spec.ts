@@ -29,6 +29,7 @@ it('Passes through action', () => {
   const action = { type: "ACTION_01" }
   invoke(action);
   expect(next).toHaveBeenCalledWith({...action, meta: "called"});
+  expect(next).toHaveBeenCalledTimes(1);
 })
 
 // ----------------------------------------------------------------------------
@@ -38,6 +39,7 @@ it('ActionCreator type', () => {
   const {next, invoke} = create(TestMiddleware_01);
   invoke(ActionCreators_01.action_01());
   expect(next).toHaveBeenCalledWith({type: "ACTION_01", meta: "called"});
+  expect(next).toHaveBeenCalledTimes(1);
 })
 
 // ----------------------------------------------------------------------------
@@ -49,6 +51,7 @@ it('Action with parameter', () => {
   const param: ActionParam_02 = { value: "value" };
   invoke(ActionCreators_01.action_02(param));
   expect(next).toHaveBeenCalledWith({type: "ACTION_02", payload: param, meta: "called"});
+  expect(next).toHaveBeenCalledTimes(1);
 })
 
 // ----------------------------------------------------------------------------
@@ -62,6 +65,7 @@ it('Call cases', () => {
 
   invoke( ActionCreators_01.action_cases_02() );
   expect(next).toHaveBeenCalledWith({type: "ACTION_CASES_02", meta: "called"});
+  expect(next).toHaveBeenCalledTimes(2);
 })
 
 // ----------------------------------------------------------------------------
@@ -73,6 +77,7 @@ it('Add cases multiple times', () => {
   invoke( ActionCreators_01.action_03() );
   expect(next).toHaveBeenNthCalledWith(1, {type: "ACTION_03", meta: "1st"});
   expect(next).toHaveBeenNthCalledWith(2, {type: "ACTION_03", meta: "2nd"});
+  expect(next).toHaveBeenCalledTimes(2);
 })
 
 // ----------------------------------------------------------------------------
@@ -84,4 +89,5 @@ it('No target type', () => {
   invoke(action);
   expect(next).toHaveBeenCalledWith(action);
   expect(next).not.toHaveBeenCalledWith({...action, meta: "called"});
+  expect(next).toHaveBeenCalledTimes(1);
 })

@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import { AnyAction } from 'typescript-fsa';
 import { MiddlewareBuilder } from '../../src';
 
@@ -9,7 +8,7 @@ import TestMiddleware_01, { ActionCreators_01, ActionParam_02 } from './middlewa
 // ----------------------------------------------------------------------------
 // create mock
 //
-function create(middleware: MiddlewareBuilder<any, Dispatch<AnyAction>>) {
+function create(middleware: MiddlewareBuilder<any>) {
   const store = {
     getState: jest.fn(() => ({})),
     dispatch: jest.fn(),

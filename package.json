@@ -1,6 +1,6 @@
 {
   "name": "typescript-fsa-redux-middleware",
-  "version": "4.0.3",
+  "version": "3.0.0",
   "description": "typescript-fsa support for redux vanilla middleware",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,13 +27,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^23.3.10",
-    "jest": "^24.1.0",
+    "jest": "^23.6.0",
+    "redux": "^3.7.2",
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "typescript": "^3.2.4"
   },
   "dependencies": {
-    "redux": "^4.0.1",
     "typescript-fsa": "^3.0.0-beta-2"
   }
 }

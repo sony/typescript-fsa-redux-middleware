@@ -21,7 +21,7 @@ export default middleware<IState>()
   // initialize
   //
   .case(AppActionCreators.initialize, (api, next, action) => {
-    api.dispatch( TodoAppLogicActionCreators.initStatus() );
-    api.dispatch( CounterAppLogicActionCreators.initStatus() );
+    api.dispatch( TodoAppLogicActionCreators.initStatus(null) );
+    api.dispatch( CounterAppLogicActionCreators.initStatus(null) );
     next(action);
   })

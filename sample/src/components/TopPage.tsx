@@ -89,7 +89,6 @@ export class TopPage extends React.Component<IProps, IStates> {
         <div style={styles.container}>
           <div>TODO : </div>
           <Todo
-            any={'test'}
             todos={todo.todos}
             onAddItem={this.onAddTodoItem.bind(this)}
             onChangeItemState={this.onChangeTodoItemState.bind(this)}

@@ -1,28 +1,28 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { compose } from 'redux';
+import { createStore } from 'redux-dynamic-modules';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+
+// application imports
+import { IState, AppModules } from './modules/app';
 import routes from './routes';
-import reducer from './reducers';
-import middlewares from './middlewares';
 
 // for Debug
-// import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-// const composeEnhancers = composeWithDevTools({});
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+const composeEnhancer = composeWithDevTools({});
 
 // for Production
-const composeEnhancers = compose;
+// const composeEnhancer = compose;
 
-const store = createStore(
-  reducer,
-  composeEnhancers(
-    applyMiddleware(
-      ...middlewares,
-    ),
-  ),
-);
+// Create redux-dynamic-modules style store
+const store = createStore<IState>(
+  /* initial state */       {},
+  /* enhancers */           [composeEnhancer],
+  /* Extensions to load */  [],
+  /* user modules */        ...AppModules );
 
 const theme = createMuiTheme();
 

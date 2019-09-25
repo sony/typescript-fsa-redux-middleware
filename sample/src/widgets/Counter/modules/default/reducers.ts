@@ -1,33 +1,36 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import { CounterAppLogicActionCreators } from '../include/actions/AppLogic/CounterAppLogic';
+import { Actions } from './operations';
 
-import { ICounterState } from '../include/state';
+// ============================================================================
+// Type Definitions
+//
+export interface IState {
+  count: number;
+}
 
 // ============================================================================
 // Initial State
 //
-const initialState : ICounterState = {
+const initialState = () : IState => ({
   count: 0,
-};
+});
 
 // ============================================================================
 // Reducer implementation
 //
-export default reducerWithInitialState<ICounterState>( initialState )
+export default reducerWithInitialState<IState>( initialState() )
 
 // ----------------------------------------------------------------------------
 // initStatus
 //
-.case( CounterAppLogicActionCreators.initStatus, (state) => {
-  return { ...initialState };
+.case( Actions.initialize, () => {
+  return { ...initialState() };
 })
 
 // ----------------------------------------------------------------------------
-// setCount
+// Update todos
 //
-.case( CounterAppLogicActionCreators.setCounter, (state, {count}) => {
-  return { ...state,
-    count,
-  }
+.case( Actions.setCounter, (state, count) => {
+  return { ...state, count };
 })

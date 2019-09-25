@@ -1,20 +1,17 @@
-import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { AnyAction } from 'typescript-fsa';
+import React, { useEffect } from 'react';
+import * as H from 'history';
 
+// material-ui
+import { makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-
-import { IState } from '../../include/state';
 
 // ============================================================================
 // CONFIG
 //
-const styles = {
+const useStyles = makeStyles<Theme>((theme) => ({
   appBar: {
     flexGrow: 1,
     position: 'relative' as 'relative',
@@ -29,45 +26,34 @@ const styles = {
   flex: {
     flexGrow: 1,
   },
-};
+}));
 
 // ============================================================================
-// Type definition
+// Type definitions
+// ----------------------------------------------------------------------------
+// Component interface
 //
-interface IStateProps {
+export interface IProps {
+  history: H.History;
+  location: H.Location<any>;
 }
-interface IDispatchProps {
-}
-
-interface IOwnProps {}
-interface IOwnStates {
-}
-
-interface IStates extends IOwnStates {}
-interface IProps extends IStateProps, IDispatchProps, IOwnProps, WithStyles<typeof styles>, RouteComponentProps {}
-
 
 // ============================================================================
-// Class implementation
-//
-export class RootContainer extends React.Component<IProps, IStates> {
+// Component implementation
+// ----------------------------------------------------------------------------
+const Component: React.FC<IProps> = (props) => {
+  const classes = useStyles({});
+  const {history, location, children} = props;
 
-  componentDidMount() {
-    console.debug(`Container::componentDidMount()`);
-    const {
-      history,
-      location,
-    } = this.props;
-
+  useEffect( () => {
+    console.debug(`Container::useEffect::initialize`);
     // Show top page
     if (location.pathname !== '/') {
       history.push({ pathname: '/' });
     }
-  }
+  }, [] );
 
-  private renderHeader() {
-    const { classes } = this.props;
-
+  function _renderHeader() {
     return (
       <AppBar position="static" color="primary" classes={{ root: classes.appBar }}>
         <Toolbar>
@@ -77,31 +63,20 @@ export class RootContainer extends React.Component<IProps, IStates> {
     );
   }
 
-  render() {
-    const { children, classes } = this.props;
+  function render() {
     return (
       <div>
-        {this.renderHeader()}
+        {_renderHeader()}
         <div className={classes.rootContainer}>
           {children}
         </div>
       </div>
     );
   }
+
+  // ==========================================================================
+  // Master renderer
+  //
+  return render();
 }
-
-// ============================================================================
-// React-Redux mapping
-//
-const mapStateToProps = (state: IState): IStateProps => {
-  return {
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>): IDispatchProps => {
-  return {
-  };
-};
-
-export default connect<IStateProps, IDispatchProps, IOwnProps>(mapStateToProps, mapDispatchToProps)
-  (withStyles(styles)(RootContainer));
+export default Component;

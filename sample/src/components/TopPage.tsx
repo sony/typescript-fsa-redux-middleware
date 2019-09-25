@@ -1,15 +1,7 @@
-import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { AnyAction } from 'typescript-fsa';
+import React from 'react';
 
-import { IState, ICounterState, getCounterState, ITodoState, getTodoState } from '../include/state';
-
-import { AppActionExecutor } from '../actions/AppActions';
-
-import Counter from './Counter/Counter';
-import Todo from './Todo/Todo';
+import Counter from '../widgets/Counter';
+import Todo from '../widgets/Todo';
 
 // ============================================================================
 // CONFIG
@@ -23,97 +15,43 @@ const styles = {
   },
 };
 
-// ============================================================================
-// Type definition
-//
-interface IStateProps {
-  counter : ICounterState;
-  todo    : ITodoState;
-}
-
-interface IDispatchProps {
-  appActionExecutor : AppActionExecutor;
-}
-
-interface IOwnStates {}
-interface IOwnProps {}
-
-interface IStates extends IOwnStates {}
-interface IProps extends IStateProps, IDispatchProps, IOwnProps, RouteComponentProps {}
 
 // ============================================================================
-// Class implementation
+// Type definitions
+// ----------------------------------------------------------------------------
+// Component interface
 //
-export class TopPage extends React.Component<IProps, IStates> {
+export interface IProps {
+}
 
-  // ==========================================================================
-  // Life cycle event handler
-  //
-
-  // ==========================================================================
-  // UI event handler
-  //
-  onClickCounterIncrease() {
-    this.props.appActionExecutor.counterIncrease();
-  }
-  onClickCounterDecrease() {
-    this.props.appActionExecutor.counterDecrease();
-  }
-  onAddTodoItem(todo: string) {
-    this.props.appActionExecutor.addTodoItem(todo);
-  }
-  onChangeTodoItemState(id: number) {
-    this.props.appActionExecutor.changeTodoItemsStatus(id);
-  }
-  onDeleteTodoItem(id: number) {
-    this.props.appActionExecutor.deleteTodoItem(id);
-  }
+// ============================================================================
+// Component implementation
+// ----------------------------------------------------------------------------
+const Component: React.FC<IProps> = (props) => {
 
   // ==========================================================================
   // render
   //
-  render() {
-    const { counter, todo } = this.props;
+  function render() {
 
     return (
       <div style={styles.root}>
         <div style={styles.container}>
           <div>Counter : </div>
-          <Counter
-            count={counter.count}
-            onClickDecrease={this.onClickCounterDecrease.bind(this)}
-            onClickIncrease={this.onClickCounterIncrease.bind(this)}
-          />
+          <Counter />
         </div>
 
         <div style={styles.container}>
           <div>TODO : </div>
-          <Todo
-            todos={todo.todos}
-            onAddItem={this.onAddTodoItem.bind(this)}
-            onChangeItemState={this.onChangeTodoItemState.bind(this)}
-            onDeleteItem={this.onDeleteTodoItem.bind(this)}
-          />
+          <Todo />
         </div>
       </div>
     );
   }
+
+  // ==========================================================================
+  // Master renderer
+  //
+  return render();
 }
-
-// ============================================================================
-// React-Redux mapping
-//
-const mapStateToProps = (state: IState): IStateProps => {
-  return {
-    counter : getCounterState(state),
-    todo    : getTodoState(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>): IDispatchProps => {
-  return {
-    appActionExecutor : new AppActionExecutor(dispatch),
-  };
-};
-
-export default connect<IStateProps, IDispatchProps, IOwnProps>(mapStateToProps, mapDispatchToProps)(TopPage);
+export default Component;

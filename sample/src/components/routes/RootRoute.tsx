@@ -1,37 +1,39 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Route } from 'react-router';
 
 import RootContainer from './RootContainer';
 
 // ============================================================================
-// Type definition
+// Type definitions
+// ----------------------------------------------------------------------------
+// Component interface
 //
-interface IOwnProps {
+export interface IProps {
   content : React.ReactNode;
 }
-interface IOwnStates {}
-
-interface IStates extends IOwnStates {}
-interface IProps extends IOwnProps {}
 
 // ============================================================================
-// Class implementation
-//
-class RootRoute extends React.Component<IProps, IStates> {
+// Component implementation
+// ----------------------------------------------------------------------------
+const Component: React.FC<IProps> = (props) => {
+  const {content} = props;
 
   // ==========================================================================
   // Render
   //
-  render() {
-    return <Route render={(props) => this.renderContent(props)} />;
+  function render() {
+    return <Route render={(aProps) => renderContent(aProps)} />;
   }
 
-  renderContent(props: any): React.ReactNode {
-    const {content} = this.props;
+  function renderContent(aProps: any): React.ReactNode {
     return (
-      <RootContainer children={content} {...props} />
+      <RootContainer children={content} {...aProps} />
     );
   }
-}
 
-export default RootRoute;
+  // ==========================================================================
+  // Master renderer
+  //
+  return render();
+}
+export default Component;

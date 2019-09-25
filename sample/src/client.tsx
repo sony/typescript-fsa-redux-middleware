@@ -24,11 +24,7 @@ const store = createStore(
   ),
 );
 
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-});
+const theme = createMuiTheme();
 
 ReactDOM.render(
   <Provider store={store}>

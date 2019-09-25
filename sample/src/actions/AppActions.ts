@@ -15,13 +15,13 @@ export class AppActionExecutor implements DispatchProp<AnyAction> {
   constructor(public dispatch: Dispatch<AnyAction>) { }
 
   initialize() {
-    this.dispatch( AppActionCreators.initialize() );
+    this.dispatch( AppActionCreators.initialize(null) );
   }
   counterIncrease() {
-    this.dispatch( AppActionCreators.counterIncrease() );
+    this.dispatch( AppActionCreators.counterIncrease(null) );
   }
   counterDecrease() {
-    this.dispatch( AppActionCreators.counterDecrease() );
+    this.dispatch( AppActionCreators.counterDecrease(null) );
   }
   addTodoItem(todo: string) {
     const param: IAddTodoItemParam = { todo };

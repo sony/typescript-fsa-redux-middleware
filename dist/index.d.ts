@@ -10,4 +10,4 @@ export interface MiddlewareBuilder<S, D extends Dispatch = Dispatch> {
     <S>(api: MiddlewareAPI<D, S>): (next: Dispatch) => Dispatch;
 }
 export declare type Handler<S, P, D extends Dispatch = Dispatch> = (api: MiddlewareAPI<D, S>, next: D, action: Action<P>) => void;
-export declare function middleware<S>(): MiddlewareBuilder<S>;
+export declare function middleware<S, D extends Dispatch = Dispatch>(): MiddlewareBuilder<S, D>;

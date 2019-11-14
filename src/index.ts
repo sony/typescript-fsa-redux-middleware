@@ -54,7 +54,7 @@ interface Case<S, P> {
 
 type CaseMap<S> = Map<string, Array<Case<S, any>>>;
 
-export function middleware<S>(): MiddlewareBuilder<S> {
+export function middleware<S, D extends Dispatch = Dispatch>(): MiddlewareBuilder<S, D> {
 
   const cases: CaseMap<S> = new Map<string, Array<Case<S, any>>>();
   const middleware = getMiddlewareFunction<S>(cases) as MiddlewareBuilder<S>;

@@ -1,6 +1,6 @@
 {
   "name": "typescript-fsa-redux-middleware",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "typescript-fsa support for redux vanilla middleware",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
